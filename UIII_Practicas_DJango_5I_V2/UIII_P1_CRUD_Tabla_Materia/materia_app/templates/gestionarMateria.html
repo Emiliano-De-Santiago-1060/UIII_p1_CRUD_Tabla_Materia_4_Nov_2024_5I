@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"> <!-- Fila principal -->
+    <!-- Columna izquierda -->
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1> Mama </h1> <!-- Contenido de la columna izquierda -->
+        <div class="card">
+            <div class="card-body">
+                <!-- Primer formulario (sin botón de enviar) -->
+                <form action="registrarMateria/" method="POST">{% csrf_token %}
+                    <div class="form-group p-2">
+                        <input type="text" id="txtcodigo" name="txtcodigo" placeholder="Nombre codigo" minleght="1" maxlength="100" required>
+                    </div>
+                    <div class="form-group p-2">
+                        <input type="text" id="txtnombre" name="txtnombre" placeholder="Nombre materia" maxlength="100" required>
+                    </div>
+                    <div class="form-group p-1">
+                        <input type="text|" id="numcreditos" name="numcreditos" placeholder="Creditos" maxlength="100" required value="1">
+                    </div>
+                    <div class="form-group p-1">
+                    <button type="submit" class="btn btn-danger">Guardar materia</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> <!-- Fin columna izquierda -->
+
+    <!-- Columna derecha -->
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <h1> Listado de materias </h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Creditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in mismaterias %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ m.codigo }}</td>
+                        <td>{{ m.nombre }}</td>
+                        <td>{{ m.credits }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> <!-- Fin columna derecha -->
+</div> <!-- Fin fila principal -->
+
+{% endblock %}
